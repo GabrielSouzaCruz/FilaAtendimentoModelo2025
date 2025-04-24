@@ -10,7 +10,7 @@ function addElemento(){
        novoElemento.focus(); //cursor no input
     } 
     else
-        alert("Fila cheia!");     
+        alert("Fila cheia!!");     
 }//fim addElemento
 //------------------------------------------------------------------------------------\\
 
