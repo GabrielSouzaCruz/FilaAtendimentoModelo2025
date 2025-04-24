@@ -1,8 +1,8 @@
 const minhaFila = new Fila(5);
 
 function addElemento(){
-    const novoElemento = 
-       document.getElementById("txtnovoNome");
+    const novoElemento = document.getElementById("txtnovoNome");
+    const alerta = document.getElementById("mensagem-remocao");
     if(!minhaFila.isFull()){
        minhaFila.enqueue(novoElemento.value);
        mostrarFila();
@@ -10,7 +10,8 @@ function addElemento(){
        novoElemento.focus(); //cursor no input
     } 
     else
-        alert("Fila cheia!!");     
+        //alert("Fila cheia!!");
+        alerta.textContent = ("Fila Cheia!!");     
 }//fim addElemento
 //------------------------------------------------------------------------------------\\
 

@@ -1,10 +1,11 @@
-//FilaCircular.js
-class Fila{ 
+// FilaCircular.js
+class Fila{
     #inicio; //# privados
     #fim;
     #qtd;
     #elementos; // vetor
-    constructor(tamanho=10){ 
+
+    constructor(tamanho = 10){
         this.#inicio = 0;
         this.#fim = -1;
         this.#qtd = 0;
@@ -12,45 +13,49 @@ class Fila{
     }
     
     isFull(){
-     return this.#fim === this.#elementos.length - 1;            
+        // fila cheia se qtd == capacidade
+        return this.#qtd === this.#elementos.length;
     }
 
     isEmpty(){
-        return this.#fim < this.#inicio; 
+        // fila vazia se qtd == 0
+        return this.#qtd === 0;
     }
 
     enqueue(dado){
         if(!this.isFull()){
-            this.#fim++;
+            // avançar fim circularmente
+            this.#fim = (this.#fim + 1) % this.#elementos.length; // garante que, se o índice ultrapassar o tamanho do array, ele volte para o início (índice 0)
             this.#elementos[this.#fim] = dado;
             this.#qtd++;
             return true;
-        }// fim if
+        } // fim if
         else
-            return false; // se estiver cheio
+            return false; // se estiver cheia
     }
 
     dequeue(){
         if(!this.isEmpty()){
-            const dado = 
-                 this.#elementos[this.#inicio];
-            this.#inicio++;
+            // remover do início
+            const dado = this.#elementos[this.#inicio];
+            // avançar início circularmente
+            this.#inicio = (this.#inicio + 1) % this.#elementos.length;
             this.#qtd--;
             return dado;
-        }// fim if
+        } // fim if
         else
-            return null; // se estiver vazio 
+            return null; // se estiver vazia
     }
 
     toString(){
         let filaString = "";
-        for(let i=this.#inicio; i<=this.#fim;i++){
-            filaString += this.#elementos[i] +" | ";
-        }// fim for
+        // percorrer qtd elementos a partir de inicio
+        for(let i = 0; i < this.#qtd; i++){
+            const idx = (this.#inicio + i) % this.#elementos.length; // garante que, se o índice ultrapassar o tamanho do array, ele volte para o início (índice 0)
+            filaString += "| " + this.#elementos[idx] + " | ";
+        } // fim for
         console.log(filaString);
         return filaString;
     }
 
-    
-
-}// fim classe
+}

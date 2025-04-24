@@ -44,8 +44,8 @@ class Fila{
 
     toString(){
         let filaString = "";
-        for(let i=this.#inicio; i<=this.#fim;i++){
-            filaString += this.#elementos[i] +" | ";
+        for(let i = this.#inicio; i <= this.#fim;i++){
+            filaString += "| " + this.#elementos[i] + " | ";
         }// fim for
         console.log(filaString);
         return filaString;
