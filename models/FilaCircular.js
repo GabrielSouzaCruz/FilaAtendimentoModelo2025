@@ -1,4 +1,4 @@
-//Fila.js
+//FilaCircular.js
 class Fila{ 
     #inicio; //# privados
     #fim;
