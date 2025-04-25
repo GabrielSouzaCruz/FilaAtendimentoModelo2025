@@ -1,17 +1,21 @@
 const minhaFila = new Fila(5);
 
 function addElemento(){
-    const novoElemento = document.getElementById("txtnovoNome");
-    const alerta = document.getElementById("mensagem-remocao");
-    if(!minhaFila.isFull()){
-       minhaFila.enqueue(novoElemento.value);
-       mostrarFila();
-       novoElemento.value = ""; //limpar
-       novoElemento.focus(); //cursor no input
-    } 
-    else
-        //alert("Fila cheia!!");
-        alerta.textContent = ("Fila Cheia!!");     
+   const alerta = document.getElementById("mensagem-remocao");
+   const novoElemento1 = document.getElementById("txtnovoNome"); //Existe para mostrar o direcionar o focus() e limpar
+   const novoElemento = document.getElementById("txtnovoNome").value;
+
+   if(novoElemento.trim() !== ""){
+      if(!minhaFila.isFull()){
+         minhaFila.enqueue(novoElemento);
+         mostrarFila();
+         novoElemento1.value = ""; //limpar
+         novoElemento1.focus(); //cursor no input
+      }else
+       //alert("Fila cheia!!");
+       alerta.textContent = ("Fila Cheia!!");
+   }else
+      alerta.textContent = ("Campo Vazio!!");     
 }//fim addElemento
 //------------------------------------------------------------------------------------\\
 
@@ -22,6 +26,7 @@ function mostrarFila(){
 //-------------------------------------------------------------------------------------\\
 
 function atenderFila(){
+   const alerta = document.getElementById("mensagem-remocao");
    if(!minhaFila.isEmpty()){
       const atendido = minhaFila.dequeue();
       //alert("Pessoa atendida: " + atendido); abre um alerta
@@ -31,7 +36,6 @@ function atenderFila(){
       mostrarFila();
    }
    else
-      alert("Fila vazia!");
-
-   
-}
+      alerta.textContent =("Fila Vazia!!");
+}//fim atenderFila
+//---------------------------------------------------------------------------------------\\

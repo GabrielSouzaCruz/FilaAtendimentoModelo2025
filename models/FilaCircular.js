@@ -51,8 +51,8 @@ class Fila{
         let filaString = "";
         // percorrer qtd elementos a partir de inicio
         for(let i = 0; i < this.#qtd; i++){
-            const idx = (this.#inicio + i) % this.#elementos.length; // garante que, se o índice ultrapassar o tamanho do array, ele volte para o início (índice 0)
-            filaString += "| " + this.#elementos[idx] + " | ";
+            const rotativo = (this.#inicio + i) % this.#elementos.length; // garante que, se o índice ultrapassar o tamanho do array, ele volte para o início (índice 0)
+            filaString += "| " + this.#elementos[rotativo] + " | ";
         } // fim for
         console.log(filaString);
         return filaString;
