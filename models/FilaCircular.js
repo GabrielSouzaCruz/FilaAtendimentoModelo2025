@@ -1,5 +1,5 @@
 // FilaCircular.js
-class Fila{
+class FilaCircular{
     #inicio; //# privados
     #fim;
     #qtd;
@@ -23,11 +23,14 @@ class Fila{
     }
 
     enqueue(dado){
-        if(!this.isFull()){
-            // avançar fim circularmente
-            this.#fim = (this.#fim + 1) % this.#elementos.length; // garante que, se o índice ultrapassar o tamanho do array, ele volte para o início (índice 0)
+        if(!this.isFull()){// avançar fim circularmente
+            if(this.#fim == this.#elementos.length-1)
+                this.#fim = 0;
+            else
+            this.#fim++;
             this.#elementos[this.#fim] = dado;
             this.#qtd++;
+            console.log("Ini: "+ this.#inicio + " Fim: " + this.#fim + " Qtd: " + this.#qtd);
             return true;
         } // fim if
         else
@@ -39,8 +42,12 @@ class Fila{
             // remover do início
             const dado = this.#elementos[this.#inicio];
             // avançar início circularmente
-            this.#inicio = (this.#inicio + 1) % this.#elementos.length;
+            if(this.#inicio === this.#elementos.length-1)
+                this.#inicio = 0;
+            else
+                this.#inicio++;
             this.#qtd--;
+            console.log("Ini: "+ this.#inicio + " Fim: " + this.#fim + " Qtd: " + this.#qtd);
             return dado;
         } // fim if
         else
@@ -49,10 +56,14 @@ class Fila{
 
     toString(){
         let filaString = "";
+        let pos = this.#inicio;
         // percorrer qtd elementos a partir de inicio
         for(let i = 0; i < this.#qtd; i++){
-            const rotativo = (this.#inicio + i) % this.#elementos.length; // garante que, se o índice ultrapassar o tamanho do array, ele volte para o início (índice 0)
-            filaString += "| " + this.#elementos[rotativo] + " | ";
+            filaString += " | " + this.#elementos[pos] + " | ";
+            if(pos === this.#elementos.length-1)
+                pos = 0;
+            else
+            pos++;
         } // fim for
         console.log(filaString);
         return filaString;

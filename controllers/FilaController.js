@@ -1,4 +1,4 @@
-const minhaFila = new Fila(5);
+const minhaFila = new FilaCircular(5);
 
 window.addEventListener("DOMContentLoaded", function () {
    const input = document.getElementById("txtnovoNome");
