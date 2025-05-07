@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Atendimento GG</title>
+  <link rel="icon" type="image/png" href="./images/favicon.png">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .painel {
+      background-color: #ffffff;
+      border: none;
+      border-radius: 16px;
+      padding: 30px 25px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      width: 320px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .painel:hover {
+      transform: scale(1.02);
+    }
+
+    .titulo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1e272e;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    #ultimoAtendimento {
+      font-size: 26px;
+      color: #0984e3;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .nome-cliente {
+      font-size: 20px;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+  </style>
+
+  <script src="controllers/PainelController.js" defer></script>
+  <script src="controllers/FilaController.js" defer></script>
+</head>
+<body>
+  <div class="painel">
+    <div class="titulo">Último Atendimento</div>
+    <div id="ultimoAtendimento" class="nome-cliente">Aguardando...</div>
+  </div>
+</body>
+</html>
