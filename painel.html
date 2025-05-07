@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"> <!-- Suporte a acentuação e caracteres especiais -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade em dispositivos móveis -->
   <title>Painel de Atendimento GG</title>
+
+  <!-- Ícone da aba -->
   <link rel="icon" type="image/png" href="./images/favicon.png">
+
   <style>
+    /* Estilo geral da página */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      background: linear-gradient(to right, #e0eafc, #cfdef3); /* Gradiente de fundo */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -16,21 +20,24 @@
       margin: 0;
     }
 
+    /* Estilo do painel */
     .painel {
       background-color: #ffffff;
       border: none;
       border-radius: 16px;
       padding: 30px 25px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Sombra suave */
       width: 320px;
       text-align: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease; /* Animação suave ao passar o mouse */
     }
 
+    /* Efeito ao passar o mouse */
     .painel:hover {
-      transform: scale(1.02);
+      transform: scale(1.02); /* Leve aumento no tamanho */
     }
 
+    /* Título do painel */
     .titulo {
       font-size: 22px;
       font-weight: 700;
@@ -40,6 +47,7 @@
       text-transform: uppercase;
     }
 
+    /* Nome do último atendido */
     #ultimoAtendimento {
       font-size: 26px;
       color: #0984e3;
@@ -47,6 +55,7 @@
       margin-top: 10px;
     }
 
+    /* Estilo adicional para o nome */
     .nome-cliente {
       font-size: 20px;
       color: #2c3e50;
@@ -54,12 +63,16 @@
     }
   </style>
 
+  <!-- Scripts responsáveis por atualizar o painel com o nome do último atendido -->
   <script src="controllers/PainelController.js" defer></script>
   <script src="controllers/FilaController.js" defer></script>
 </head>
+
 <body>
+  <!-- Estrutura principal do painel -->
   <div class="painel">
     <div class="titulo">Último Atendimento</div>
+    <!-- Elemento atualizado dinamicamente com localStorage -->
     <div id="ultimoAtendimento" class="nome-cliente">Aguardando...</div>
   </div>
 </body>
