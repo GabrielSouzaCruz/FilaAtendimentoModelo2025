@@ -40,6 +40,8 @@
 
     <!-- Seção de adição de pessoas à fila -->
     <h2><img src="./images/favicon.png" /> Fila de Atendimentos</h2>
+    <br> 
+
     <p>Adicione pessoas na fila:</p>
 
     <div class="form-group">
@@ -54,6 +56,7 @@
         <button id="btnAdicionar" class="btn btn-dark" onclick="addFila()">Adicionar à fila</button>
         <button class="btn btn-success" onclick="atenderFila()">Atender</button>
         <button class="btn btn-info" onclick="buscarCpf()">Buscar</button>
+        <button class="btn btn-primary" onclick="window.open('painel.html', '_blank')">Aba de Atendimentos</button>
       </div>
     </div>
 
@@ -70,12 +73,5 @@
       </span>
     </div>
   </div>
-
-  <!-- Script que abre automaticamente o painel em uma nova aba ao carregar a página -->
-  <script>
-    window.onload = function () {
-      window.open('painel.html'); // Exibe o painel em tempo real com o último atendimento
-    }
-  </script>
 </body>
 </html>
