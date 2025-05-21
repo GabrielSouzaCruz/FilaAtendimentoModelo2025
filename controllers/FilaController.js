@@ -1,5 +1,7 @@
-// Cria uma instância de uma fila circular com capacidade para 5 elementos
-const minhaFila = new FilaCircular(5);
+
+const minhaFila = new FilaEncadeada();
+
+const minhaFilaPr = new FilaEncadeada();
 
 // Aguarda o carregamento completo do DOM antes de executar o código
 window.addEventListener("DOMContentLoaded", function () {
@@ -36,39 +38,38 @@ function addFila() {
    }
 
    // Se a fila não estiver cheia, adiciona o novo atendimento
-   if (!minhaFila.isFull()) {
+   //if (!minhaFila.isFull()) {
       const novoAtendimento = new Atendimento(novoElemento.value.trim(), novoCpf.value.trim());
       minhaFila.enqueue(novoAtendimento); // Enfileira novo atendimento
       mostrarFila(); // Atualiza visualmente a fila
       novoElemento.value = ""; // Limpa campo nome
       novoCpf.value = "";      // Limpa campo CPF
       novoElemento.focus();    // Volta o foco para o campo nome
-   } else {
-      const mostrarAtendimento = document.getElementById("mensagem-remocao");
-      mostrarAtendimento.textContent = "Fila Cheia !!!";
+   //} else {
+    //  const mostrarAtendimento = document.getElementById("mensagem-remocao");
+      //mostrarAtendimento.textContent = "Fila Cheia !!!";
       novoElemento.value = ""; // Limpa campo nome
       novoCpf.value = "";      // Limpa campo CPF
-   }
+   //}
 }
 
 //------------------------------------------------------------------------------------\\
 
 // Função que mostra os elementos da fila na tela
 function mostrarFila() {
-   const listaFila = document.getElementById("listFila");
-   listaFila.textContent = ""; // Limpa qualquer texto
-   listaFila.innerHTML = "";   // Limpa os elementos da lista
+      const lblPessoasFila = document.getElementById("lblPessoasFila");
+      const listaPessoasFila = document.getElementById("listFila");
+      //listaPessoasFila.innerText = minhaFila.toString();
+      //console.log(minhaFila.toString());
 
-   let contador = 1; // Contador de posição na fila
-
-   // Percorre todos os elementos da fila
-   for (let item of minhaFila) {
-      const listaElemento = document.createElement("li");
-      listaElemento.textContent = `${contador}. ${item}`; // Exibe posição + item
-      listaFila.insertAdjacentElement("beforeend", listaElemento);
-      contador++; // Incrementa posição
-   }
-}
+       lblPessoasFila.innerText = "Pessoas na fila:";
+      listaPessoasFila.innerText = "";
+      for (const atendimento of minhaFila){
+            const li = document.createElement("li");
+            li.innerText = atendimento.toString();
+            listaPessoasFila.appendChild(li);
+      }
+    }
 //-------------------------------------------------------------------------------------\\
 
 // Função que atende (remove) a primeira pessoa da fila
@@ -145,3 +146,22 @@ function calcularDiferencaHoras(hora1, hora2) {
    return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
 }
 //---------------------------------------------------------------------------------------\\
+
+function calcularIdade(dataNascimento) {
+  // Espera data no formato "dd/mm/aaaa"
+  const [dia, mes, ano] = dataNascimento.split('/').map(Number);
+
+  const hoje = new Date();
+  const dataNasc = new Date(ano, mes - 1, dia); // Mês começa em 0 no JavaScript
+
+  let idade = hoje.getFullYear() - dataNasc.getFullYear();
+  const mesAtual = hoje.getMonth();
+  const diaAtual = hoje.getDate();
+
+  // Verifica se a pessoa ainda não fez aniversário neste ano
+  if (mesAtual < mes - 1 || (mesAtual === mes - 1 && diaAtual < dia)) {
+    idade--;
+  }
+
+  return idade;
+}
