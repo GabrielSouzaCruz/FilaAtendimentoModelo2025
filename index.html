@@ -51,6 +51,9 @@
       <label for="txtnovoCpf" class="mt-2">CPF:</label>
       <input type="text" class="form-control" id="txtnovoCpf" placeholder="Digite o CPF da Pessoa" />
 
+      <label for="txtnovoIdade" class="mt-2">Data de Nascimento:</label>
+      <input type="text" class="form-control" id="txtnovoIdade" placeholder="Digite a data de nascimento da Pessoa Ex: 11/11/1111" />
+
       <div class="mt-3">
         <!-- Botões de ação -->
         <button id="btnAdicionar" class="btn btn-dark" onclick="addFila()">Adicionar à fila</button>
@@ -61,8 +64,11 @@
     </div>
 
     <!-- Lista que exibirá os elementos da fila -->
-    <h2 id="lblPessoasFila" class="mt-4"><img src="./images/pessoa.png" /> Dados da Fila</h2>
+    <h2 id="lblPessoasFilaPr" class="mt-4"><img src="./images/pessoa.png" /> Dados da Fila Prioritaria</h2>
+    <ul id="listFilaPr"></ul>
+    <h2 id="lblPessoasFila" class="mt-4"><img src="./images/pessoa.png" /> Dados da Fila Geral</h2>
     <ul id="listFila"></ul>
+    
 
     <!-- Rodapé com mensagem de autoria -->
     <div class="container d-flex justify-content-center align-items-center text-center" style="background-color: #000000b6;">

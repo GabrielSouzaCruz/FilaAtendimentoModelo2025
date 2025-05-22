@@ -1,18 +1,27 @@
 
 const minhaFila = new FilaEncadeada();
-
 const minhaFilaPr = new FilaEncadeada();
+let contadot = 0;
 
 // Aguarda o carregamento completo do DOM antes de executar o código
 window.addEventListener("DOMContentLoaded", function () {
    const inputNome = document.getElementById("txtnovoNome"); // Campo de nome
    const inputCpf = document.getElementById("txtnovoCpf");   // Campo de CPF
+   const inputIdade = document.getElementById("txtnovoIdade");   // Campo de Idade
 
    // Ao pressionar Enter no campo de nome, foca no campo CPF
    inputNome.addEventListener("keydown", function(event) {
       if (event.key === "Enter") {
          event.preventDefault(); // Evita comportamento padrão (submit de formulário)
          inputCpf.focus(); // Move o foco para o campo CPF
+      }
+   });
+
+   // Ao pressionar Enter no campo de nome, foca no campo Idade
+   inputNome.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+         event.preventDefault(); // Evita comportamento padrão (submit de formulário)
+         inputIdade.focus(); // Move o foco para o campo Idade
       }
    });
 
@@ -29,27 +38,30 @@ window.addEventListener("DOMContentLoaded", function () {
 function addFila() {
    const novoElemento = document.getElementById("txtnovoNome");
    const novoCpf = document.getElementById("txtnovoCpf");
+   const novoIdade = document.getElementById("txtnovoIdade");
 
    // Verifica se os campos estão preenchidos
    if (novoElemento.value.trim() === "" || novoCpf.value.trim() === "") {
       const mostrarAtendimento = document.getElementById("mensagem-remocao");
-      mostrarAtendimento.textContent = "Por favor, preencha o nome e o CPF !!!";
+      mostrarAtendimento.textContent = "Por favor, preencha o nome, CPF e Data de Nascimento !!!";
       return null; 
    }
 
-   // Se a fila não estiver cheia, adiciona o novo atendimento
-   //if (!minhaFila.isFull()) {
-      const novoAtendimento = new Atendimento(novoElemento.value.trim(), novoCpf.value.trim());
-      minhaFila.enqueue(novoAtendimento); // Enfileira novo atendimento
+   const novoAtendimento = new Atendimento(
+      novoElemento.value.trim(),
+      novoCpf.value.trim(),
+      novoIdade.value.trim() // Aqui você estava passando o elemento DOM!
+   );
+      if(novoAtendimento.idade >= 60)
+         minhaFilaPr.enqueue(novoAtendimento); // Enfileira novo atendimento Prioritario
+      else
+         minhaFila.enqueue(novoAtendimento);  // Enfileira novo atendimento geral
+
       mostrarFila(); // Atualiza visualmente a fila
       novoElemento.value = ""; // Limpa campo nome
       novoCpf.value = "";      // Limpa campo CPF
+      novoIdade.value = "";    // Limpa campo Idade
       novoElemento.focus();    // Volta o foco para o campo nome
-   //} else {
-    //  const mostrarAtendimento = document.getElementById("mensagem-remocao");
-      //mostrarAtendimento.textContent = "Fila Cheia !!!";
-      novoElemento.value = ""; // Limpa campo nome
-      novoCpf.value = "";      // Limpa campo CPF
    //}
 }
 
@@ -59,15 +71,27 @@ function addFila() {
 function mostrarFila() {
       const lblPessoasFila = document.getElementById("lblPessoasFila");
       const listaPessoasFila = document.getElementById("listFila");
-      //listaPessoasFila.innerText = minhaFila.toString();
-      //console.log(minhaFila.toString());
+      const lblPessoasFilaPr = document.getElementById("lblPessoasFilaPr")
+      const listaPessoasFilaPr = document.getElementById("listFilaPr");
+      listaPessoasFila.innerText = minhaFila.toString();
+      listaPessoasFila.innerText = minhaFilaPr.toString();
+      console.log(minhaFila.toString());
+      console.log(minhaFilaPr.toString());
 
-       lblPessoasFila.innerText = "Pessoas na fila:";
+      lblPessoasFila.innerText = "Pessoas na fila:";
       listaPessoasFila.innerText = "";
       for (const atendimento of minhaFila){
             const li = document.createElement("li");
             li.innerText = atendimento.toString();
             listaPessoasFila.appendChild(li);
+      }
+
+      lblPessoasFilaPr.innerText = "Pessoas na fila Prioritaria:";
+      listaPessoasFilaPr.innerText = "";
+      for (const atendimento of minhaFilaPr){
+            const li = document.createElement("li");
+            li.innerText = atendimento.toString();
+            listaPessoasFilaPr.appendChild(li);
       }
     }
 //-------------------------------------------------------------------------------------\\
